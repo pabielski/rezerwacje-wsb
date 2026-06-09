@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> About</h1>
+<x-layout title="About">
     <div>
         <a href="/razdwa">Raz dwa trzy</a>
-</body>
-</html>
+    </div>
+    <x-card title="About">
+        <p>About</p>
+    </x-card>
+</x-layout>
