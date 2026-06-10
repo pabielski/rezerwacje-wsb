@@ -21,12 +21,16 @@ Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             <div class="col-sm-12">
                 <h1>Laravel page</h1>
             </div>
+            <nav class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
+                @yield('menu')
+            </nav>
         </div>
     </div>
     <hr>
    @yield('content')
 
-    <script src="/js/bootstrap.min.js"></script>
+   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </body>
 
 </html>
