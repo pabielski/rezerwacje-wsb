@@ -17,6 +17,26 @@ class HotelsController extends Controller
     public function index()
     {
         $hotels = $this->hotelService->getAllHotels();
-        return view('hotel.index', ['hotels' => $hotels], ['title' => 'Hotels']);
+        return view('hotels.index', ['hotels' => $hotels], ['title' => 'Hotels']);
+    }
+
+    public function editView($id){
+        $model = $this->hotelService->getHotelById($id);
+        return view('hotels.edit', ['model' => $model, 'title' => 'Edit Hotel']);
+    }
+
+    public function update(Request $request, $id){
+        $this->hotelService->updateHotel($request, $id);
+        return redirect('hotels');
+    }   
+
+    public function createView(){
+        $model = $this->hotelService->createhotel();
+        return view('hotels.create', ['model' => $model, 'title' => 'Create Hotel']);
+    }
+
+    public function addToDatabase(Request $request){
+        $this->hotelService->addToDatabase($request);
+        return redirect('hotels');
     }
 }

@@ -10,4 +10,37 @@ class HotelService
     {
         return Hotel::all();
     }
+
+    public function getHotelById($id)
+    {
+        return Hotel::find($id);
+    }
+
+    public function updateHotel(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+        $hotel = Hotel::find($id);
+        $hotel->name = $request->input('name');
+        $hotel->description = $request->input('description');
+        $hotel->city = $request->input('city');
+        $hotel->address = $request->input('address');
+        $hotel->save();
+    }
+    public function createhotel(){
+        $hotel = new Hotel();
+        return $hotel;
+    }
+    public function addToDatabase(Request $request){
+        $hotel = new Hotel();
+        $hotel->Id = null;
+        $hotel->name = $request->input('name');
+        $hotel->description = $request->input('description');
+        $hotel->city = $request->input('city');
+        $hotel->address = $request->input('address');
+        $hotel->save();
+        return $hotel;
+    }
 }
