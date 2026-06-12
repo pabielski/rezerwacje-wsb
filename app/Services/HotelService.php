@@ -29,7 +29,7 @@ class HotelService
         $hotel->address = $request->input('address');
         $hotel->save();
     }
-    public function createhotel(){
+    public function createHotel(){
         $hotel = new Hotel();
         return $hotel;
     }
