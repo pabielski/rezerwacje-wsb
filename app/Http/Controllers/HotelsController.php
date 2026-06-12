@@ -17,15 +17,15 @@ class HotelsController extends Controller
     public function index()
     {
         $hotels = $this->hotelService->getAllHotels();
-        return view('hotels.index', ['hotels' => $hotels], ['title' => 'Hotels']);
+        return view('hotels.index', ['hotels' => $hotels, 'title' => 'Hotels']);
     }
 
-    public function editView($id){
+    public function editView(int $id){
         $model = $this->hotelService->getHotelById($id);
         return view('hotels.edit', ['model' => $model, 'title' => 'Edit Hotel']);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, int $id){
         $this->hotelService->updateHotel($request, $id);
         return redirect('hotels');
     }   
