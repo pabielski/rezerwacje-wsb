@@ -11,12 +11,12 @@ class HotelService
         return Hotel::all();
     }
 
-    public function getHotelById($id)
+    public function getHotelById(int $id)
     {
         return Hotel::find($id);
     }
 
-    public function updateHotel(Request $request, $id)
+    public function updateHotel(Request $request, int $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
