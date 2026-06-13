@@ -9,6 +9,9 @@
     <div class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
         <h1 class="text-xl font-bold">{{ $room->name }}</h1>
         <p class="text-zinc-600 text-sm">{{ $room->description }}</p>
+        @foreach($room->amenityRooms as $amenityRoom)
+    <p>{{ $amenityRoom->amenity->name }}</p>
+@endforeach
         <div>
         <a href="{{ url()->current() }}/{{ $room->id }}" class="text-green-500">View</a>
         <a href="{{ url()->current() }}/edit/{{ $room->id }}" class="text-blue-500">Edit</a>

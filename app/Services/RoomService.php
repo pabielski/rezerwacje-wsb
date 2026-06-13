@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 
+use App\Models\AmenityRoom;
+use App\Models\Amenity;
 use Illuminate\Http\Request;
 use App\Models\Room;
 
@@ -40,4 +42,21 @@ class RoomService
         $room->save();
         return $room;
     }
+
+    public function addAmenity(int $id){
+        $amenityRoom = new AmenityRoom();
+        $amenityRoom->room_id=$id;
+        $amenities=Amenity::all();
+         return [
+        'amenityRoom' => $amenityRoom,
+        'amenities' => $amenities
+    ];
+    }
+    public function addAmenityToDb(Request $request, int $id){
+        $amenityRoom  = new AmenityRoom();
+        $amenityRoom ->room_id=$id;
+        $amenityRoom ->amenity_id=$request->input('amenity_id');
+        $amenityRoom ->save();
+    }   
+
 }

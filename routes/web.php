@@ -25,4 +25,6 @@ Route::get('/rooms/edit/{id}',[RoomController::class,"editView"]);
 Route::get('/rooms/create', [RoomController::class, 'createView']);
 Route::post('/rooms/add-to-database', [RoomController::class, 'addToDatabase']);
 Route::post('/rooms/update/{id}',[RoomController::class,"updateRoom"]);
+Route::get('/rooms/add-amenity/{id}',[RoomController::class, 'addAmenity']);
+Route::post('/rooms/add-amenity/{id}',[RoomController::class, 'addAmenityToDatabase']);
 // Route::delete('/rooms/delete/{id}',[RoomController::class,"delete"]);
