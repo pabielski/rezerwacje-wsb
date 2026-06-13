@@ -10,4 +10,9 @@ class Room extends Model
     const UPDATED_AT = 'updated_at';
     protected $table = 'rooms';
     protected $primaryKey = 'id';
+
+    public function amenityRooms()
+    {
+        return $this->hasMany(AmenityRoom::class,"room_id");
+    }
 }

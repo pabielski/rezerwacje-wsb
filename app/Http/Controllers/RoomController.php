@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Amenity;
+use App\Models\AmenityRoom;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
 
@@ -31,6 +33,17 @@ class RoomController extends Controller
     }
     public function addToDatabase(Request $request){
         $this->roomService->addRoom($request);
+        return redirect('rooms');
+    }
+
+    public function addAmenity(int $id){
+        $data=$this->roomService->addAmenity($id);
+        return view('rooms.add-amenity',['amenityRoom'=>$data['amenityRoom'], "amenities"=> $data['amenities']]);
+
+    }
+
+    public function addAmenityToDatabase(Request $request, int $id){
+        $this->roomService->addAmenityToDb($request, $id);
         return redirect('rooms');
     }
 
