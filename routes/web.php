@@ -4,6 +4,8 @@ use App\Http\Controllers\AmenityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\RoomController;
+
 Route::get('/',[HomeController::class,"index"]);
 Route::get('/hotels', [HotelsController::class, 'index']);
 Route::get('/hotels/edit/{id}',[HotelsController::class,"editView"]);
@@ -17,3 +19,10 @@ Route::get('/amenities/create', [AmenityController::class, 'getCreateView']);
 Route::post('/amenities/add-to-database', [AmenityController::class, 'create']);
 Route::post('/amenities/update/{id}',[AmenityController::class,"update"]);
 Route::delete('/amenities/delete/{id}',[AmenityController::class,"delete"]);
+
+Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/rooms/edit/{id}',[RoomController::class,"editView"]);
+Route::get('/rooms/create', [RoomController::class, 'createView']);
+Route::post('/rooms/add-to-database', [RoomController::class, 'addToDatabase']);
+Route::post('/rooms/update/{id}',[RoomController::class,"updateRoom"]);
+// Route::delete('/rooms/delete/{id}',[RoomController::class,"delete"]);
