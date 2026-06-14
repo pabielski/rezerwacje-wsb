@@ -14,8 +14,8 @@ class RoomController extends Controller
     {
         $this->roomService = new RoomService();
     }
-    public function index(){
-        $rooms=$this->roomService->getAllRooms();
+    public function index(Request $request){
+        $rooms=$this->roomService->getAllRooms($request);
         return view('rooms.index',['rooms'=>$rooms, 'title'=>'Wszystkie pokoje']);
     }
 

@@ -6,8 +6,18 @@ use App\Models\Amenity;
 
 class AmenityService
 {
-    public function getAllAmenities(){
-        return Amenity::where('is_active', 1)->get();
+    public function getAllAmenities(Request $request){
+        $query = Amenity::where('is_active', 1);
+
+        if ($request->filled('search')) {
+            $query->whereAny(
+                ['name', 'description'],
+                'like',
+                '%' . $request->input('search') . '%'
+            );
+        }
+
+        return $query->get();
     }
 
     //widok edycji
@@ -42,6 +52,12 @@ class AmenityService
 
     public function deleteAmenity($id){
         $amenity = Amenity::find($id);
-        $amenity->delete();
+
+        if ($amenity == null) {
+            return;
+        }
+
+        $amenity->is_active = 0;
+        $amenity->save();
     }
 }

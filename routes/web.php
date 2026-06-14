@@ -35,3 +35,4 @@ Route::get('/reservations/edit/{id}',[ReservationController::class,"editView"]);
 Route::get('/reservations/create', [ReservationController::class, 'createView']);
 Route::post('/reservations/add-to-database', [ReservationController::class, 'addToDatabase']);
 Route::post('/reservations/update/{id}',[ReservationController::class,"updateReservation"]);
+Route::post('/reservations/delete/{id}',[ReservationController::class,"deleteReservation"]);

@@ -6,9 +6,23 @@ use App\Models\Hotel;
 
 class HotelService
 {
-    public function getAllHotels()
+    public function getAllHotels(Request $request)
     {
-        return Hotel::all();
+        $query = Hotel::where('is_active', 1);
+
+        if ($request->filled('search')) {
+            $query->whereAny(
+                ['name', 'city', 'address'],
+                'like',
+                '%' . $request->input('search') . '%'
+            );
+        }
+
+        if ($request->filled('city')) {
+            $query->where('city', 'like', '%' . $request->input('city') . '%');
+        }
+
+        return $query->get();
     }
 
     public function getHotelById(int $id)
@@ -34,6 +48,12 @@ class HotelService
         return $hotel;
     }
     public function addToDatabase(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
         $hotel = new Hotel();
         $hotel->Id = null;
         $hotel->name = $request->input('name');
