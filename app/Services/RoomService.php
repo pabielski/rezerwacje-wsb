@@ -5,7 +5,6 @@ use App\Models\AmenityRoom;
 use App\Models\Amenity;
 use Illuminate\Http\Request;
 use App\Models\Room;
-
 class RoomService
 {
     public function getAllRooms(){
@@ -34,7 +33,7 @@ class RoomService
         $room = new Room();
         $room->Id = null;
         $room->name = $request->input('name');
-        $room->hotel_id=$request->inpit('hotel_id');
+        $room->hotel_id=$request->input('hotel_id');
         $room->description = $request->input('description');
         $room->room_number = $request->input('room_number');
         $room->capacity = $request->input('capacity');

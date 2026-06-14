@@ -12,7 +12,7 @@
         <input type="text" name="description" value="{{ $room->description }}">
         <input type="text" name="room_number" value="{{ $room->room_number }}">
         <input type="text" name="capacity" value="{{ $room->capacity }}">
-        <input type="text" name="price_per_night" value="{{ $room->price_per_night }}">
+        <input type="text" name="price" value="{{ $room->price_per_night }}">
         <button type="submit">Create</button>
     </form>
 @endsection

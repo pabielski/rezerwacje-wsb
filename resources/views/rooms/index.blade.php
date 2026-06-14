@@ -16,6 +16,9 @@
         <a href="{{ url()->current() }}/{{ $room->id }}" class="text-green-500">View</a>
         <a href="{{ url()->current() }}/edit/{{ $room->id }}" class="text-blue-500">Edit</a>
         <a href="{{ url()->current() }}/delete/{{ $room->id }}" class="text-red-500">Delete</a>
+        <a href="/rooms/add-amenity/{{ $room->id }}" class="text-purple-500">
+    Add amenity
+</a>
     </div>
     </div>
    

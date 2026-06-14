@@ -1,15 +1,19 @@
-<form method="post">
-    @csrf
+@extends('main')
 
-    <select name="amenity_id">
-        @foreach($amenities as $amenity)
-            <option value="{{ $amenity->id }}">
-                {{ $amenity->name }}
-            </option>
-        @endforeach
-    </select>
+@section('content')
+    <h1>Dodaj udogodnienie do pokoju</h1>
 
-    <button type="submit">
-        Dodaj
-    </button>
-</form>
+    <form method="post">
+        @csrf
+
+        <select name="amenity_id">
+            @foreach($amenities as $amenity)
+                <option value="{{ $amenity->id }}">
+                    {{ $amenity->name }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit">Dodaj</button>
+    </form>
+@endsection

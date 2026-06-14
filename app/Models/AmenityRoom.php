@@ -9,11 +9,11 @@ class AmenityRoom extends Model
         protected $table = 'amenity_room';
     protected $primaryKey = 'id';
 
-    public function Amenity()
+    public function amenity()
     {
         return $this->belongsTo(Amenity::class, "amenity_id");
     }
-      public function Room()
+      public function room()
     {
         return $this->belongsTo(Room::class, "room_id");
     }
