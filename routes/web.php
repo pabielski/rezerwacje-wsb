@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/',[HomeController::class,"index"]);
 Route::get('/hotels', [HotelsController::class, 'index']);
@@ -36,3 +37,9 @@ Route::get('/reservations/create', [ReservationController::class, 'createView'])
 Route::post('/reservations/add-to-database', [ReservationController::class, 'addToDatabase']);
 Route::post('/reservations/update/{id}',[ReservationController::class,"updateReservation"]);
 Route::post('/reservations/delete/{id}',[ReservationController::class,"deleteReservation"]);
+
+Route::get('/login', [AuthController::class, 'loginView']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'registerView']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
