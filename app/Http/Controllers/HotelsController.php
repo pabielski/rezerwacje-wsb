@@ -14,9 +14,9 @@ class HotelsController extends Controller
         $this->hotelService = new HotelService();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $hotels = $this->hotelService->getAllHotels();
+        $hotels = $this->hotelService->getAllHotels($request);
         return view('hotels.index', ['hotels' => $hotels, 'title' => 'Hotels']);
     }
 

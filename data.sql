@@ -56,6 +56,10 @@ CREATE TABLE amenity_room (
 CREATE TABLE reservations (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
+    guest_first_name VARCHAR(255) NULL,
+    guest_last_name VARCHAR(255) NULL,
+    guest_email VARCHAR(255) NULL,
+    guest_phone VARCHAR(50) NULL,
     room_id BIGINT UNSIGNED NOT NULL,
     date_from DATE NOT NULL,
     date_to DATE NOT NULL,

@@ -7,8 +7,26 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 class RoomService
 {
-    public function getAllRooms(){
-        return Room::all();
+    public function getAllRooms(Request $request){
+        $query = Room::where('is_active', 1);
+
+        if ($request->filled('search')) {
+            $query->whereAny(
+                ['name', 'room_number', 'description'],
+                'like',
+                '%' . $request->input('search') . '%'
+            );
+        }
+
+        if ($request->filled('hotel_id')) {
+            $query->where('hotel_id', $request->input('hotel_id'));
+        }
+
+        if ($request->filled('capacity_min')) {
+            $query->where('capacity', '>=', $request->input('capacity_min'));
+        }
+
+        return $query->get();
     }
 
     public function getRoomById(int $id){

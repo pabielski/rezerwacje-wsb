@@ -14,8 +14,8 @@ class AmenityController extends Controller
     {
         $this->amenityService= new AmenityService();
     }
-    public function index (){
-        $amenities= $this->amenityService->getAllAmenities();
+    public function index (Request $request){
+        $amenities= $this->amenityService->getAllAmenities($request);
         return view('amenity.index',['amenities' =>  $amenities, 'title'=>'Strona z wyposażeniem']);
     }
 

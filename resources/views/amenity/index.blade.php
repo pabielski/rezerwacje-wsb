@@ -5,13 +5,23 @@
 @endsection
 @section('content')
     <h1>{{$title}}</h1>
-    @foreach ($amenities as $amenity)
+
+    <form action="/amenities" method="get" class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
+        <div class="mb-4">
+            <label class="block text-sm text-zinc-600 mb-1">Szukaj (nazwa, opis)</label>
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="np. WiFi" class="w-full border rounded px-2 py-1">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Szukaj</button>
+        <a href="/amenities" class="text-zinc-600 ml-4">Wyczyść filtry</a>
+    </form>
+
+    @forelse ($amenities as $amenity)
     <div class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
         <h1 class="text-xl font-bold">{{ $amenity->name }}</h1>
         <p class="text-zinc-600 text-sm">{{ $amenity->description }}</p>
         <div>
         <a href="{{ url()->current() }}/{{ $amenity->id }}" class="text-green-500">View</a>
-        <a href="{{ url()->current() }}/edit/{{ $amenity->id }}" class="text-blue-500">Edit</a>
+        <a href="/amenities/edit/{{ $amenity->id }}" class="text-blue-500">Edit</a>
         <form action="/amenities/delete/{{ $amenity->id }}" method="post" style="display:inline;">
     @csrf
     @method('DELETE')
@@ -19,6 +29,7 @@
 </form>
     </div>
     </div>
-   
-    @endforeach
+    @empty
+    <p class="text-zinc-600">Brak wyposażenia spełniającego kryteria wyszukiwania.</p>
+    @endforelse
 @endsection
