@@ -63,4 +63,16 @@ class HotelService
         $hotel->save();
         return $hotel;
     }
+
+    public function deleteHotel(int $id): void
+    {
+        $hotel = Hotel::find($id);
+
+        if ($hotel == null) {
+            return;
+        }
+
+        $hotel->is_active = 0;
+        $hotel->save();
+    }
 }

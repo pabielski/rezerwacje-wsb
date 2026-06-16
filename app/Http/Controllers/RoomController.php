@@ -47,4 +47,9 @@ class RoomController extends Controller
         return redirect('rooms');
     }
 
+    public function delete(int $id)
+    {
+        $this->roomService->deleteRoom($id);
+        return redirect('rooms');
+    }
 }
