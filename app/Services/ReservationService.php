@@ -4,6 +4,9 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use App\Models\Room;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class ReservationService
 {
     public function getAllReservations(Request $request)
@@ -113,4 +116,58 @@ class ReservationService
         $reservation->is_active = 0;
         $reservation->save();
     }
+
+    //client reservation
+    public function addClientReservation(Request $request)
+{
+    $request->validate([
+        'room_id' => 'required',
+        'date_from' => 'required|date',
+        'date_to' => 'required|date|after:date_from',
+        'guest_first_name' => 'required|string|max:255',
+        'guest_last_name' => 'required|string|max:255',
+        'guest_email' => 'required|email|max:255',
+        'guest_phone' => 'required|string|max:20',
+    ]);
+
+    $isBusy = Reservation::where('room_id', $request->input('room_id'))
+        ->where('is_active', 1)
+        ->where(function ($query) use ($request) {
+            $query->where('date_from', '<', $request->input('date_to'))
+                  ->where('date_to', '>', $request->input('date_from'));
+        })
+        ->exists();
+
+    if ($isBusy) {
+        return null;
+    }
+
+    $room = Room::find($request->input('room_id'));
+    $nights = Carbon::parse($request->input('date_from'))
+        ->diffInDays(Carbon::parse($request->input('date_to')));
+
+    $reservation = new Reservation();
+
+    $reservation->user_id = Auth::id();
+    $reservation->room_id = $request->input('room_id');
+    $reservation->date_from = $request->input('date_from');
+    $reservation->date_to = $request->input('date_to');
+    $reservation->guest_first_name = $request->input('guest_first_name');
+    $reservation->guest_last_name = $request->input('guest_last_name');
+    $reservation->guest_email = $request->input('guest_email');
+    $reservation->guest_phone = $request->input('guest_phone');
+    $reservation->status = 'new';
+    $reservation->is_active = 1;
+    $reservation->total_price = $room->price_per_night * $nights;
+
+    $reservation->save();
+
+    return $reservation;
+}
+public function getReservationsByUserId(int $userId)
+{
+    return Reservation::where('user_id', $userId)
+        ->where('is_active', 1)
+        ->get();
+}
 }

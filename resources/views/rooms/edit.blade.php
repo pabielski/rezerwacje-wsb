@@ -5,6 +5,15 @@
 @endsection
 @section('content')
     <h1>Edit Hotel</h1>
+
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form action="/rooms/update/{{ $room->id }}" method="post">
         @csrf
            <input type="text" name="name" value="{{ $room->name }}">
