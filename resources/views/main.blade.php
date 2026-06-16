@@ -50,6 +50,8 @@ Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             <a href="/rooms" class="text-blue-500 hover:text-blue-600 font-medium">Pokoje</a>
             <a href="/amenities" class="text-blue-500 hover:text-blue-600 font-medium">Udogodnienia</a>
             <a href="/reservations" class="text-blue-500 hover:text-blue-600 font-medium">Rezerwacje</a>
+        @else
+            <a href="/my-reservations" class="text-blue-500 hover:text-blue-600 font-medium">Moje rezerwacje</a>
         @endif
     @endauth
 </nav>

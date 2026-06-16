@@ -42,8 +42,10 @@ class AuthController extends Controller
         if ($isLogged) {
             return redirect('/');
         }
-    
-        return redirect('/login');
+
+        return back()
+            ->withErrors(['email' => 'Nieprawidłowy email lub hasło.'])
+            ->onlyInput('email');
     }
 
     public function logout(Request $request)

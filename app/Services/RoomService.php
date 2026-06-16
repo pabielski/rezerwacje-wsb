@@ -34,6 +34,15 @@ class RoomService
     }
 
     public function updateRoom(Request $request, int $id){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'hotel_id' => 'required|integer|min:1',
+            'room_number' => 'required|string|max:50',
+            'capacity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:255',
+        ]);
+
         $room = Room::find($id);
         $room->name = $request->input('name');
         $room->hotel_id=$request->input('hotel_id');
@@ -48,6 +57,15 @@ class RoomService
         return $hotel;
     }
     public function addRoom(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'hotel_id' => 'required|integer|min:1',
+            'room_number' => 'required|string|max:50',
+            'capacity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string|max:255',
+        ]);
+
         $room = new Room();
         $room->Id = null;
         $room->name = $request->input('name');

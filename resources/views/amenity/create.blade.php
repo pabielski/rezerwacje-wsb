@@ -5,6 +5,15 @@
 @endsection
 @section('content')
     <h1>{{$title}}</h1>
+
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form action="/amenities/add-to-database" method="post">
         @csrf
         <input type="text" name="name" value="{{ $amenity->name }}">

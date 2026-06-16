@@ -42,6 +42,11 @@ class AmenityService
         $amenity->save();
     }
      public function addAmenity(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
         $amenity = new Amenity();
         $amenity->Id = null; //??
         $amenity->name = $request->input('name');

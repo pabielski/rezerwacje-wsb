@@ -7,6 +7,7 @@ use App\Http\Controllers\HotelsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientReservationController;
 
 Route::get('/',[HomeController::class,"index"]);
 
@@ -45,3 +46,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'registerView']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
+
+//client routes
+Route::get('/my-reservations', [ClientReservationController::class, 'index'])->middleware('auth');
+Route::get('/my-reservations/create', [ClientReservationController::class, 'createView'])->middleware('auth');;
+Route::post('/my-reservations/add-to-database', [ClientReservationController::class, 'addToDatabase'])->middleware('auth');
