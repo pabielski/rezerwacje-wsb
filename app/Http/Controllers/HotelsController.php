@@ -39,4 +39,10 @@ class HotelsController extends Controller
         $this->hotelService->addToDatabase($request);
         return redirect('hotels');
     }
+
+    public function delete(int $id)
+    {
+        $this->hotelService->deleteHotel($id);
+        return redirect('hotels');
+    }
 }

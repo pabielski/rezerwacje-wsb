@@ -74,6 +74,17 @@ class RoomService
         $amenityRoom ->room_id=$id;
         $amenityRoom ->amenity_id=$request->input('amenity_id');
         $amenityRoom ->save();
-    }   
+    }
 
+    public function deleteRoom(int $id): void
+    {
+        $room = Room::find($id);
+
+        if ($room == null) {
+            return;
+        }
+
+        $room->is_active = 0;
+        $room->save();
+    }
 }

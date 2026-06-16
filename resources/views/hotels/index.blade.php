@@ -29,7 +29,11 @@
         <div>
         <a href="{{ url()->current() }}/{{ $hotel->id }}" class="text-green-500">View</a>
         <a href="/hotels/edit/{{ $hotel->id }}" class="text-blue-500">Edit</a>
-        <a href="{{ url()->current() }}/delete/{{ $hotel->id }}" class="text-red-500">Delete</a>
+        <form action="/hotels/delete/{{ $hotel->id }}" method="post" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-red-500">Delete</button>
+        </form>
     </div>
     </div>
     @empty

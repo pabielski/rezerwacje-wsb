@@ -41,9 +41,21 @@ Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
                     @endauth
                 </div>
             </div>
-            <nav class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
+            <nav class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4 flex gap-4">
+    <a href="/" class="text-blue-500 hover:text-blue-600 font-medium">Strona główna</a>
+
+    @auth
+        @if(auth()->user()->role == 'admin')
+            <a href="/hotels" class="text-blue-500 hover:text-blue-600 font-medium">Hotele</a>
+            <a href="/rooms" class="text-blue-500 hover:text-blue-600 font-medium">Pokoje</a>
+            <a href="/amenities" class="text-blue-500 hover:text-blue-600 font-medium">Udogodnienia</a>
+            <a href="/reservations" class="text-blue-500 hover:text-blue-600 font-medium">Rezerwacje</a>
+        @endif
+    @endauth
+</nav>
+            <div class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
                 @yield('menu')
-            </nav>
+            </div>
         </div>
     </div>
     <hr>
