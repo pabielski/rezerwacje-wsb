@@ -39,7 +39,7 @@ Route::get('/reservations/edit/{id}',[ReservationController::class,"editView"])-
 Route::get('/reservations/create', [ReservationController::class, 'createView'])->middleware('admin');
 Route::post('/reservations/add-to-database', [ReservationController::class, 'addToDatabase'])->middleware('admin');
 Route::post('/reservations/update/{id}',[ReservationController::class,"updateReservation"])->middleware('admin');
-Route::post('/reservations/delete/{id}',[ReservationController::class,"deleteReservation"])->middleware('admin')    ;
+Route::delete('/reservations/delete/{id}',[ReservationController::class,"deleteReservation"])->middleware('admin');
 
 Route::get('/login', [AuthController::class, 'loginView']);
 Route::post('/login', [AuthController::class, 'login']);

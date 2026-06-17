@@ -91,7 +91,6 @@ class ReservationService
         'total_price' => 'required|numeric|min:0',
         ]);
         $reservation = new Reservation();
-        $reservation->Id = null;
         $reservation->room_id=$request->input('room_id');
         $reservation->user_id=$request->input('user_id');
         $reservation->guest_first_name = $request->input('guest_first_name');

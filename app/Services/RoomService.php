@@ -67,7 +67,6 @@ class RoomService
         ]);
 
         $room = new Room();
-        $room->Id = null;
         $room->name = $request->input('name');
         $room->hotel_id=$request->input('hotel_id');
         $room->description = $request->input('description');

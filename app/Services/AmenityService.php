@@ -48,7 +48,6 @@ class AmenityService
         ]);
 
         $amenity = new Amenity();
-        $amenity->Id = null; //??
         $amenity->name = $request->input('name');
         $amenity->description = $request->input('description');
         $amenity->save();
