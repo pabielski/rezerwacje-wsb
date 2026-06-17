@@ -1,16 +1,36 @@
 @extends('main')
-@section('menu')
-    <a href="/hotels/create" class="text-blue-500">Create</a>
-    <a href="/hotels" class="text-blue-500">List</a>
-@endsection
 @section('content')
-    <h1>Create Hotel</h1>
-    <form action="/hotels/add-to-database" method="post">
+    <div class="mb-6">
+        <a href="/hotels" class="text-sm text-muted hover:text-brand font-medium">← Lista hoteli</a>
+        <h1 class="text-2xl font-bold text-heading mt-2">Dodaj hotel</h1>
+    </div>
+
+    @if ($errors->any())
+        <ul class=" list-none text-danger text-sm rounded-xl px-4 py-3 mb-4 ">
+            @foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach
+        </ul>
+    @endif
+
+    <form action="/hotels/add-to-database" method="post" class="bg-surface border border-border rounded-2xl shadow-sm p-6 max-w-xl">
         @csrf
-        <input type="text" name="name" value="{{ $model->name }}">
-        <input type="text" name="description" value="{{ $model->description }}">
-        <input type="text" name="city" value="{{ $model->city }}">
-        <input type="text" name="address" value="{{ $model->address }}">
-        <button type="submit">Create</button>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-heading mb-1.5">Nazwa</label>
+                <input type="text" name="name" value="{{ old('name', $model->name) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-heading mb-1.5">Miasto</label>
+                <input type="text" name="city" value="{{ old('city', $model->city) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-heading mb-1.5">Adres</label>
+                <input type="text" name="address" value="{{ old('address', $model->address) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-heading mb-1.5">Opis</label>
+                <input type="text" name="description" value="{{ old('description', $model->description) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+            </div>
+            <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Zapisz</button>
+        </div>
     </form>
 @endsection

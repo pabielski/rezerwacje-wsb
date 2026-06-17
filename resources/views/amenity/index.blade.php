@@ -1,35 +1,34 @@
 @extends('main')
-@section('menu')
-    <a href="/amenities/create" class="text-blue-500">Create</a>
-    <a href="/amenities" class="text-blue-500">List</a>
-@endsection
 @section('content')
-    <h1>{{$title}}</h1>
-
-    <form action="/amenities" method="get" class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
-        <div class="mb-4">
-            <label class="block text-sm text-zinc-600 mb-1">Szukaj (nazwa, opis)</label>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="np. WiFi" class="w-full border rounded px-2 py-1">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-heading">{{ $title }}</h1>
+            <p class="text-sm text-muted mt-1">Wyposażenie pokoi</p>
         </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Szukaj</button>
-        <a href="/amenities" class="text-zinc-600 ml-4">Wyczyść filtry</a>
+        <a href="/amenities/create" class="bg-brand hover:bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-semibold shrink-0">+ Dodaj udogodnienie</a>
+    </div>
+
+    <form action="/amenities" method="get" class="bg-surface border border-border rounded-2xl shadow-sm p-5 mb-6">
+        <div class="mb-4">
+            <label class="block text-sm font-semibold text-heading mb-1.5">Szukaj (nazwa, opis)</label>
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="np. WiFi" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+        </div>
+        <button type="submit" class="bg-brand hover:bg-brand-dark text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Szukaj</button>
+        <a href="/amenities" class="text-muted hover:text-heading text-sm font-medium ml-3">Wyczyść filtry</a>
     </form>
 
-    @forelse ($amenities as $amenity)
-    <div class="bg-zinc-100 border border-zinc-200 rounded-lg shadow-md p-4 mb-4">
-        <h1 class="text-xl font-bold">{{ $amenity->name }}</h1>
-        <p class="text-zinc-600 text-sm">{{ $amenity->description }}</p>
-        <div>
-        <a href="{{ url()->current() }}/{{ $amenity->id }}" class="text-green-500">View</a>
-        <a href="/amenities/edit/{{ $amenity->id }}" class="text-blue-500">Edit</a>
-        <form action="/amenities/delete/{{ $amenity->id }}" method="post" style="display:inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="text-red-500">Delete</button>
-</form>
+    <div class="bg-surface border border-border rounded-2xl shadow-sm overflow-hidden">
+        @forelse ($amenities as $amenity)
+            <div class="p-5 border-b border-border last:border-b-0 hover:bg-page/50 transition-colors">
+                <h2 class="text-lg font-bold text-heading">{{ $amenity->name }}</h2>
+                <p class="text-muted text-sm mt-1">{{ $amenity->description }}</p>
+                <div class="mt-3 flex gap-4 text-sm">
+                    <a href="/amenities/edit/{{ $amenity->id }}" class="text-brand font-semibold hover:text-brand-dark">Edytuj</a>
+                    <form action="/amenities/delete/{{ $amenity->id }}" method="post" class="inline">@csrf @method('DELETE')<button type="submit" class="text-danger font-semibold hover:opacity-80">Usuń</button></form>
+                </div>
+            </div>
+        @empty
+            <p class="p-8 text-center text-muted">Brak wyposażenia.</p>
+        @endforelse
     </div>
-    </div>
-    @empty
-    <p class="text-zinc-600">Brak wyposażenia spełniającego kryteria wyszukiwania.</p>
-    @endforelse
 @endsection
