@@ -32,7 +32,7 @@ class AuthController extends Controller
     {
         $this->userService->registerUser($request);
 
-        return redirect('/login');
+        return redirect('/login')->with('status', 'Konto zostało utworzone. Możesz się zalogować.');
     }
 
     public function login(Request $request)
