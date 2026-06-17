@@ -34,6 +34,8 @@ class HotelService
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
         ]);
         $hotel = Hotel::find($id);
@@ -55,7 +57,6 @@ class HotelService
             'description' => 'nullable|string|max:255',
         ]);
         $hotel = new Hotel();
-        $hotel->Id = null;
         $hotel->name = $request->input('name');
         $hotel->description = $request->input('description');
         $hotel->city = $request->input('city');

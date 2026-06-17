@@ -31,7 +31,7 @@ class HotelsController extends Controller
     }   
 
     public function createView(){
-        $model = $this->hotelService->createhotel();
+        $model = $this->hotelService->createHotel();
         return view('hotels.create', ['model' => $model, 'title' => 'Create Hotel']);
     }
 

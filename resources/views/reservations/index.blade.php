@@ -31,7 +31,7 @@
                 <p class="text-muted text-sm mt-2">{{ $reservation->date_from }} — {{ $reservation->date_to }} · {{ $reservation->total_price }} zł</p>
                 <div class="mt-3 flex gap-4 text-sm">
                     <a href="/reservations/edit/{{ $reservation->id }}" class="text-brand font-semibold hover:text-brand-dark">Edytuj</a>
-                    <form action="/reservations/delete/{{ $reservation->id }}" method="post" class="inline">@csrf<button type="submit" class="text-danger font-semibold hover:opacity-80">Usuń</button></form>
+                    <form action="/reservations/delete/{{ $reservation->id }}" method="post" class="inline">@csrf @method('DELETE')<button type="submit" class="text-danger font-semibold hover:opacity-80">Usuń</button></form>
                 </div>
             </div>
         @empty
