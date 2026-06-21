@@ -44,6 +44,10 @@
                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('reservations*') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
                             Rezerwacje
                         </a>
+                        <a href="/reviews"
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('reviews*') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
+                            Opinie
+                        </a>
                     @else
                         <a href="/my-reservations"
                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('my-reservations') && !request()->is('my-reservations/create') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
@@ -52,6 +56,14 @@
                         <a href="/my-reservations/create"
                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('my-reservations/create') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
                             Nowa rezerwacja
+                        </a>
+                        <a href="/my-reviews"
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('my-reviews') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
+                            Moje opinie
+                        </a>
+                        <a href="/reviews/create"
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium {{ request()->is('reviews/create') ? 'bg-brand-light/60 text-brand-dark font-semibold' : 'text-muted hover:bg-page hover:text-heading' }}">
+                            Dodaj opinię
                         </a>
                     @endif
                 </nav>

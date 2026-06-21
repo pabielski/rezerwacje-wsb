@@ -17,7 +17,7 @@
                 </div>
                 <p class="text-heading mt-2 font-medium">{{ $reservation->guest_first_name }} {{ $reservation->guest_last_name }}</p>
                 <p class="text-muted text-sm mt-1">{{ $reservation->date_from }} — {{ $reservation->date_to }}</p>
-                <p class="text-muted text-sm">Pokój #{{ $reservation->room_id }} · <span class="text-brand font-semibold">{{ $reservation->total_price }} zł</span></p>
+                <p class="text-muted text-sm">{{ $reservation->room->name }} · <span class="text-brand font-semibold">{{ $reservation->total_price }} zł</span></p>
             </div>
         @empty
             <div class="p-10 text-center">

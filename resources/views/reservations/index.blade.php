@@ -27,7 +27,9 @@
                 <div class="flex flex-wrap justify-between gap-2">
                     <h2 class="text-lg font-bold text-heading">#{{ $reservation->id }} · {{ $reservation->guest_first_name }} {{ $reservation->guest_last_name }}</h2>
                     <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-page text-muted">{{ $reservation->status }}</span>
+     
                 </div>
+                <p class="text-muted text-sm mt-1">{{ $reservation->room->name }}</p>
                 <p class="text-muted text-sm mt-2">{{ $reservation->date_from }} — {{ $reservation->date_to }} · {{ $reservation->total_price }} zł</p>
                 <div class="mt-3 flex gap-4 text-sm">
                     <a href="/reservations/edit/{{ $reservation->id }}" class="text-brand font-semibold hover:text-brand-dark">Edytuj</a>

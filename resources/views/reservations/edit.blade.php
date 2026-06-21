@@ -13,7 +13,15 @@
         <div><label class="block text-sm font-semibold text-heading mb-1.5">Telefon</label><input type="text" name="guest_phone" value="{{ old('guest_phone', $reservation->guest_phone) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
         <div><label class="block text-sm font-semibold text-heading mb-1.5">Data od</label><input type="date" name="date_from" value="{{ old('date_from', $reservation->date_from) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
         <div><label class="block text-sm font-semibold text-heading mb-1.5">Data do</label><input type="date" name="date_to" value="{{ old('date_to', $reservation->date_to) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
-        <div><label class="block text-sm font-semibold text-heading mb-1.5">ID pokoju</label><input type="text" name="room_id" value="{{ old('room_id', $reservation->room_id) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
+        <div>
+            <label class="block text-sm font-semibold text-heading mb-1.5">Pokój</label>
+            <select name="room_id" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20">
+                <option value="">Wybierz pokój</option>
+                @foreach ($rooms as $room)
+                    <option value="{{ $room->id }}" @selected(old('room_id', $reservation->room_id) == $room->id)>{{ $room->name }} (nr {{ $room->room_number }}) — {{ $room->price_per_night }} zł/noc</option>
+                @endforeach
+            </select>
+        </div>
         <div><label class="block text-sm font-semibold text-heading mb-1.5">ID użytkownika</label><input type="text" name="user_id" value="{{ old('user_id', $reservation->user_id) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
         <div><label class="block text-sm font-semibold text-heading mb-1.5">Cena (zł)</label><input type="text" name="total_price" value="{{ old('total_price', $reservation->total_price) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
         <div><label class="block text-sm font-semibold text-heading mb-1.5">Status</label><input type="text" name="status" value="{{ old('status', $reservation->status) }}" class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"></div>
