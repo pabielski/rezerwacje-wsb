@@ -6,26 +6,30 @@ use App\Models\Amenity;
 use App\Models\AmenityRoom;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
-
+use App\Services\HotelService;
 class RoomController extends Controller
 {
     private RoomService $roomService;
+    private HotelService $hotelService;
     public function __construct()
     {
         $this->roomService = new RoomService();
+        $this->hotelService = new HotelService();
     }
     public function index(Request $request){
         $rooms=$this->roomService->getAllRooms($request);
         return view('rooms.index',['rooms'=>$rooms, 'title'=>'Wszystkie pokoje']);
     }
 
-    public function editView(int $id){
+    public function editView(Request $request, int $id){
         $rooms=$this->roomService->getRoomById($id);
-        return view('rooms.edit',['room'=>$rooms,'title'=>'Edytuj pokoj']);
+        $hotels=$this->hotelService->getAllHotels($request);
+        return view('rooms.edit',['room'=>$rooms,'title'=>'Edytuj pokoj','hotels' => $hotels]);
     }
-    public function createView(){
+    public function createView(Request $request){
         $rooms= $this->roomService->createRoom();
-        return view('rooms.create',['room'=>$rooms,'title'=>'Dodaj nowy pokój']);
+        $hotels=$this->hotelService->getAllHotels($request);
+        return view('rooms.create',['room'=>$rooms,'title'=>'Dodaj nowy pokój','hotels' => $hotels]);
     }
     public function updateRoom(Request $request, int $id){
         $this->roomService->updateRoom($request, $id);

@@ -87,6 +87,10 @@ class RoomService
     ];
     }
     public function addAmenityToDb(Request $request, int $id){
+        $request->validate([
+            'amenity_id' => 'required|integer|exists:amenities,id',
+        ]);
+
         $amenityRoom  = new AmenityRoom();
         $amenityRoom ->room_id=$id;
         $amenityRoom ->amenity_id=$request->input('amenity_id');

@@ -8,7 +8,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientReservationController;
-
+use App\Http\Controllers\ReviewController;
 Route::get('/',[HomeController::class,"index"]);
 
 Route::get('/hotels', [HotelsController::class, 'index'])->middleware('admin');
@@ -51,3 +51,12 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/my-reservations', [ClientReservationController::class, 'index'])->middleware('auth');
 Route::get('/my-reservations/create', [ClientReservationController::class, 'createView'])->middleware('auth');;
 Route::post('/my-reservations/add-to-database', [ClientReservationController::class, 'addToDatabase'])->middleware('auth');
+
+
+Route::get('/reviews', [ReviewController::class, 'index'])->middleware('admin');
+Route::get('/my-reviews', [ReviewController::class, 'myReviews'])->middleware('auth');
+Route::delete('/reviews/delete/{id}', [ReviewController::class, 'delete'])->middleware('auth');
+Route::get('/reviews/edit/{id}', [ReviewController::class, 'editView'])->middleware('auth');
+Route::post('/reviews/update/{id}', [ReviewController::class, 'update'])->middleware('auth');
+Route::get('/reviews/create', [ReviewController::class, 'createView'])->middleware('auth');
+Route::post('/reviews/add-to-database', [ReviewController::class, 'addToDatabase'])->middleware('auth');

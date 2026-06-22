@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use App\Services\ReservationService;
 use Illuminate\Http\Request;
-
+use App\Services\RoomService;
 class ReservationController extends Controller
 {
    private ReservationService $reservationService;
-
+   private RoomService $roomService;
     public function __construct()
     {
         $this->reservationService = new ReservationService();
+        $this->roomService = new RoomService();
     }
     public function index(Request $request){
         $reservations=$this->reservationService->getAllReservations($request);
@@ -20,14 +21,16 @@ class ReservationController extends Controller
     }
 
 
-    public function editView(int $id){
+    public function editView(Request $request, int $id){
         $reservation=$this->reservationService->getReservationById($id);
-        return view('reservations.edit',['reservation'=>$reservation,'title'=>'Edytuj rezerwacje']);
+        $rooms = $this->roomService->getAllRooms($request);
+        return view('reservations.edit',['reservation'=>$reservation,'title'=>'Edytuj rezerwacje', 'rooms' => $rooms]);
     }
 
-    public function createView(){
+    public function createView(Request $request){
+        $rooms = $this->roomService->getAllRooms($request);
         $reservation= $this->reservationService->createReservation();
-        return view('reservations.create',['reservation'=>$reservation,'title'=>'Dodaj nową rezerwację']);
+        return view('reservations.create',['reservation'=>$reservation,'title'=>'Dodaj nową rezerwację', 'rooms' => $rooms]);
     }
     public function updateReservation(Request $request, int $id){
         $this->reservationService->updateReservation($request, $id);

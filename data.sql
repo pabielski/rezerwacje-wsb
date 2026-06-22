@@ -72,6 +72,18 @@ CREATE TABLE reservations (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    is_active BIT NOT NULL DEFAULT 1,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
 INSERT INTO hotels (name, city, address, description, is_active, created_at, updated_at) VALUES
 ('Hotel Nad Jeziorem', 'Mikołajki', 'ul. Jeziorna 10', 'Hotel położony blisko jeziora.', 1, NOW(), NOW()),
 ('Hotel Centrum', 'Kraków', 'ul. Główna 5', 'Hotel w centrum miasta.', 1, NOW(), NOW()),

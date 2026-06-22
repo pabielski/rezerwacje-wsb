@@ -59,7 +59,8 @@ class ReservationService
         'date_from' => 'required|date',
         'date_to' => 'required|date|after:date_from',
         'total_price' => 'required|numeric|min:0',
-        'status' => 'required',
+        'status' => 'required|in:new,confirmed,cancelled',
+
         ]);
         $reservation = Reservation::find($id);
         $reservation->room_id=$request->input('room_id');
@@ -90,6 +91,7 @@ class ReservationService
         'date_to' => 'required|date|after:date_from',
         'total_price' => 'required|numeric|min:0',
         ]);
+        
         $reservation = new Reservation();
         $reservation->room_id=$request->input('room_id');
         $reservation->user_id=$request->input('user_id');
